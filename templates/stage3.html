@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="stage">
+	<h1>Stage 3: Adding Videos to Your Page</h1>
+		<div class="lesson-title-box">
+			<h2>Stage 3 Table of Contents</h2>
+				{% for concept in concepts_3_toc %}
+					<div class="concept">
+	  					<h3></h3>	
+	  						<div class="content">
+	  							<p>
+	  								{{ concept[0] }}
+	  							</p>
+	  						</div>
+	  				</div>
+	  			{% endfor %}
+		</div>
+
+		<div class="lesson-title-box">
+			<h2>Stage 3 Vocabulary<a name="vocabulary"></a></h2>
+				{% for concept in concepts_3_vocab %}
+					<div class="concept">
+	  					<h3>{{ concept[0] }}</h3>	
+	  						<div class="content">
+	  							<p>
+	  								{{ concept[1] }}
+	  							</p>
+	  						</div>
+	  				</div>
+	  			{% endfor %}
+		</div>
+
+		<div class="lesson-title-box">
+			<h2>Movies Website Process<a name="process"></a></h2>
+				{% for concept in concepts_3_movie %}
+					<div class="concept">
+	  					<h3>{{ concept[0] }}</h3>	
+	  						<div class="content">
+	  							<p>
+	  								{{ concept[1] }}
+	  							</p>
+	  						</div>
+	  				</div>
+	  			{% endfor %}
+		</div>
+
+		<div class="lesson-title-box">
+			<h2>Summary<a name="summary"></a></h2>
+				{% for concept in concepts_3_summary %}
+					<div class="concept">
+	  					<h3>{{ concept[0] }}</h3>	
+	  						<div class="content">
+	  							<p>
+	  								{{ concept[1] }}
+	  							</p>
+	  						</div>
+	  				</div>
+	  			{% endfor %}
+		</div>
+</div>
+{% endblock %}		
