@@ -18,46 +18,156 @@ import os
 import urllib
 import cgi
 
+
 from google.appengine.api import users
-from google.appengine.ext import db
-from google.appengine.ext.webapp.template import render
+from google.appengine.ext import ndb
+from datetime import datetime
+
 from os import path
 
 
 import jinja2
 import webapp2
 
+
+
 JINJA_ENVIRONMENT = jinja2.Environment(
 	loader = jinja2.FileSystemLoader(os.path.dirname(__file__) + "/templates"))
 
-class Handler(webapp2.RequestHandler):
+template_dir = os.path.join(os.path.dirname(__file__), 'templates')
+jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir))
 
+
+
+DEFAULT_GUESTBOOK_NAME = 'default_guestbook'
+STAGE_1_CONCEPTS = 'stage_1_concepts'
+
+################# Datastore Keys ############
+def guestbook_key(guestbook_name=DEFAULT_GUESTBOOK_NAME):
+    """Constructs a Datastore key for a Guestbook entity.
+
+    We use guestbook_name as the key.
+    """
+    return ndb.Key('Guestbook', guestbook_name)
+
+def stage_1_key(stage_1_name=STAGE_1_CONCEPTS):
+	return ndb.Key('Stage1Library', stage_1_name)
+
+################# Datastore Models ############
+class Author(ndb.Model):
+    """Sub model for representing an author."""
+    identity = ndb.StringProperty(indexed=False)
+    email = ndb.StringProperty(indexed=False)
+
+class Greeting(ndb.Model):
+	"""A main model for representing an individual Guestbook entry."""
+
+	author = ndb.StructuredProperty(Author)
+	content = ndb.StringProperty(indexed=False)
+	date = ndb.DateTimeProperty(auto_now_add=True)
+
+class Stage1db(ndb.Model):
+	concepts_1_1_title = ndb.StringProperty(indexed=False)
+	concepts_1_1_content = ndb.StringProperty(indexed=False)
+	concepts_1_2 = ndb.StringProperty(indexed=False)
+
+############### Handler #################
+class Handler(webapp2.RequestHandler):
+	def write(self, *a, **kw):
+		self.response.out.write(*a, **kw)
+
+	def render_str(self, template, **params):
+		t = jinja_env.get_template(template)
+		return t.render(params)
+
+	def render(self, template, **kw):
+		self.write(self.render_str(template, **kw))
+
+############### Datastore Inputs ############
+class Guestbook(webapp2.RequestHandler):
+	def post(self):
+        # We set the same parent key on the 'Greeting' to ensure each
+        # Greeting is in the same entity group. Queries across the
+        # single entity group will be consistent. However, the write
+        # rate to a single entity group should be limited to
+        # ~1/second.
+		guestbook_name = self.request.get('guestbook_name',
+                  					DEFAULT_GUESTBOOK_NAME)
+		greeting = Greeting(parent=guestbook_key(DEFAULT_GUESTBOOK_NAME))
+
+		if users.get_current_user():
+			greeting.author = Author(
+				identity=users.get_current_user().user_id(),
+				email=users.get_current_user().email())
+
+		greeting.content = self.request.get('content')
+		greeting.put()
+
+		query_params = {'guestbook_name': guestbook_name}
+		self.redirect('/?' + urllib.urlencode(query_params))
+
+class Stage1Library(webapp2.RequestHandler):
+	def post(self):
+		stage_1_name = self.request.get('stage_1_name', STAGE_1_CONCEPTS)
+
+		stage_1_concept = Stage1db(parent=stage_1_key(STAGE_1_CONCEPTS))
+
+
+		concepts_1_1 = [ 
+
+		["Lesson 1: The basics of the web and HTML", "HTML Notes", "Browsers are built to read pages of HTML code that then display text. HTML is written with a series of elements and tags that are organized in tree like structures from biggest to smallest. CSS then comes in to make that content have color, borders, flexible structure so that webpages can be viewed on different screen sizes, etc." ]
+		]
+
+		for concept_title in concepts_1_1[0]:
+			stage1db.concepts_1_1_title = self.request.get('concepts_1_1_title')
+			stage1db.put()
+
+		query_params = {'stage_1_name': stage_1_name}
+
+
+
+
+################# Pages ##################
+class MainPage(Handler):
 	def get(self):
 		title = "Kris Tryber Intro to Programming"
+		login = users.create_login_url(self.request.uri)
+		logout = users.create_logout_url(self.request.uri)
 		user = users.get_current_user()
-
-		template_vars = {
-			'title': title,
-			'user': user,
-			'login': users.create_login_url(self.request.uri),
-            'logout': users.create_logout_url(self.request.uri),
-		}
-
-		# renders my base html page
-		template = JINJA_ENVIRONMENT.get_template('base.html')
-		self.response.out.write(template.render(template_vars))
-
-
 	
+		guestbook_name = self.request.get('guestbook_name', DEFAULT_GUESTBOOK_NAME)
+		posts_to_fetch = 10
+		greetings_query = Greeting.query(ancestor=guestbook_key(DEFAULT_GUESTBOOK_NAME)).order(-Greeting.date)
+		greetings = greetings_query.fetch(posts_to_fetch)
+
+		self.render("base.html", title=title, user=user, login=login, logout=logout, greetings=greetings)
+
+
+
+#class Stage1Posting(webapp2.RequestHandler):
+	#def post(self):
+
 
 class Stage1(Handler):
 	def get(self):
 		title = "Kris Tryber Intro to Programming Stage 1"
 		user = users.get_current_user()
+		login = users.create_login_url(self.request.uri)
+		logout = users.create_logout_url(self.request.uri)
 
-		concepts_1_1 = [
+		#comments stage 1
+		guestbook_name = self.request.get('guestbook_name', DEFAULT_GUESTBOOK_NAME)
+		posts_to_fetch = 10
+		greetings_query = Greeting.query(ancestor=guestbook_key(DEFAULT_GUESTBOOK_NAME)).order(-Greeting.date)
+		greetings = greetings_query.fetch(posts_to_fetch)
 
-		["HTML Notes", "Browsers are built to read pages of HTML code that then display text. HTML is written with a series of elements and tags that are organized in tree like structures from biggest to smallest. CSS then comes in to make that content have color, borders, flexible structure so that webpages can be viewed on different screen sizes, etc." ]
+		stage_1_name = self.request.get('stage_1_name', STAGE_1_CONCEPTS)
+		
+
+		
+		concepts_1_1 = [ 
+
+		["Lesson 1: The basics of the web and HTML", "HTML Notes", "Browsers are built to read pages of HTML code that then display text. HTML is written with a series of elements and tags that are organized in tree like structures from biggest to smallest. CSS then comes in to make that content have color, borders, flexible structure so that webpages can be viewed on different screen sizes, etc." ]
 		]
 		 
 		concepts_1_2 = [
@@ -77,29 +187,18 @@ class Stage1(Handler):
 		["Looking for errors in HTML and CSS", "<ul><li><a href=""http://validator.w3.org/#validate_by_input"">To verify HTML</a></li><li><a href=""http://jigsaw.w3.org/css-validator/#validate_by_input"">To verify CSS</a></li></ul>" ]
 
 		]
-		
-
-		#variables to pass into the template
-		template_vars = {
-			'title': title,
-			'user': user,
-			'login': users.create_login_url(self.request.uri),
-            'logout': users.create_logout_url(self.request.uri),
-            'concepts_1_1': concepts_1_1,
-            'concepts_1_2': concepts_1_2,
-		}
-		template = JINJA_ENVIRONMENT.get_template('stage1.html')
-		self.response.out.write(template.render(template_vars))
-
-		
 
 
-	
+		self.render("stage1.html", title=title, user=user, concepts_1_1=concepts_1_1, concepts_1_2=concepts_1_2, login=login, logout=logout, greetings=greetings)
+
 
 class Stage2(Handler):
 	def get(self):
 		title = "Kris Tryber Intro to Programming Stage 2"
 		user = users.get_current_user()
+		login = users.create_login_url(self.request.uri)
+		logout = users.create_logout_url(self.request.uri)
+
 		concepts_2_1 = [
 
 		["Notes Link", "<a href=""https://www.evernote.com/shard/s250/nl/32113319/ebce4900-4c30-46bb-a628-6d7a8801125a/"">Stage 2 Lesson 1:Evernote Notes</a>"],
@@ -170,24 +269,15 @@ class Stage2(Handler):
 		]
 
 
-		template_vars = {
-			'title': title,
-			'user': user,
-			'login': users.create_login_url(self.request.uri),
-            'logout': users.create_logout_url(self.request.uri),
-            'concepts_2_1': concepts_2_1,
-            'concepts_2_2': concepts_2_2,
-            'concepts_2_3': concepts_2_3,
-            'concepts_2_4': concepts_2_4,
-            'concepts_2_5': concepts_2_5,
-		}
-		template = JINJA_ENVIRONMENT.get_template('stage2.html')
-		self.response.out.write(template.render(template_vars))
+
+		self.render("stage2.html", title=title, user=user, concepts_2_1= concepts_2_1, concepts_2_2=concepts_2_2, concepts_2_3=concepts_2_3, concepts_2_4=concepts_2_4, concepts_2_5=concepts_2_5, login=login, logout=logout)
 
 class Stage3(Handler):
 	def get(self):
 		title = "Kris Tryber Intro to Programming Stage 3"
 		user = users.get_current_user()
+		login = users.create_login_url(self.request.uri)
+		logout = users.create_logout_url(self.request.uri)
 
 		concepts_3_toc = ["<ul><li><a href=""#vocabulary"">Vocabulary</a></li><li><a href=""#process"">Movie Website Process</a></li><li><a href=""#summary"">Summary</a></li></ul>"],
 
@@ -229,50 +319,35 @@ class Stage3(Handler):
 		["Object Oriented Programming", "When writing code in Python copy and pasting code is never a good idea simply becuase if you ever wanted to change that code you would have to remember every place that you pasted to change the code there as well. Also code will always be changed/altered as the project grows. As your program gets more and more complex creating classes for content that will be duplicated will make it easier to go back and change or edit.<BR><br>A perfect example is my notes website.  If you read the code you can tell that there are 3 pages, one for each stage but all of the HTML is duplicated to create another section or concept.  Each section contains a concept title and content related to the concept.  If I ever wanted to change each section and add an example for each concept I would have to go and edit every concept in this webpage.<br><br>What would be better is if I could use python and create a class for a ""concept"" that took arguments for a title and description.<br><br><img src=""/screenshots/classMyContent.png""><br><br>Then once I was done I wanted to go back and add an ""example"" for each concept I could with ease.  The steps to do that would be to add a new member variable for my content class for ""example"".<br><br><img src=""/screenshots/classMyContentExample.png""><br><br>As my notes webpage gets more and more complicated I could keep editing that class to add more items that would be related to each content box. One other thing that I learned from the article linked in my first submission review was the need to keep related functions inside the classes that they are used for to keep the code readable. As the project got bigger this would be a must so that related functions wouldn't get overlooked.  Your classes overtime kind of become a table of contents section of a book. If you go to the code for this class (chapter) it will include all of these things(chapter content or sections).<br><br>In stage 2 we learned how to do this with functions but it used lists and indexing to find which content to put where. If we were to rewrite that into a class it would be much cleaner.<br><br>HTML/CSS classes and Python classes work in a similar way which is a good example of how a class works. Each CSS class on this webpage is a blueprint so that I can re use the class over and over again to get the same result without copy and pasting.  I then could go change anything about that blueprint in my intro.css and it would change throughout the whole website eliminating the possibly of error.<br><br>The other way to do this would be to go through and add inline CSS to each section but then if I ever needed to change the font color or size I would have to do it for every instance. In summary intro.css is a file that contains multiple blueprints for various sections that I have setup and whenever I need to create another section I just pull from those blueprints to create new instances of the CSS classes or id's.<br><br>This is a good example of Object Oriented Programming in HTML because if anyone was to read the code or wanted to make a change to the ""concept_title"", they could find that in my intro.css folder and make the change without causing any errors."]
 		]
 
-
-
-		template_vars = {
-			'title': title,
-			'user': user,
-			'login': users.create_login_url(self.request.uri),
-            'logout': users.create_logout_url(self.request.uri),
-            'concepts_3_toc': concepts_3_toc,
-            'concepts_3_vocab': concepts_3_vocab,
-            'concepts_3_movie': concepts_3_movie,
-            'concepts_3_summary': concepts_3_summary,
-		}
-		template = JINJA_ENVIRONMENT.get_template('stage3.html')
-		self.response.out.write(template.render(template_vars))
+		self.render("stage3.html", title=title, user=user, concepts_3_toc=concepts_3_toc, concepts_3_vocab=concepts_3_vocab, concepts_3_movie=concepts_3_movie, concepts_3_summary=concepts_3_summary,login=login, logout=logout)
 
 class Stage4(Handler):
 	def get(self):
 		title = "Kris Tryber Intro to Programming"
-
-		lesson_title_boxes = ["Lesson 1", "Lesson 2"]
-		titles = ["one", "two"]
-
-	
-
-
 		user = users.get_current_user()
-		template_vars = {
-			'title': title,
-			'lesson_title_boxes': lesson_title_boxes,
-			'titles': titles,
-			'user': user,
-			'login': users.create_login_url(self.request.uri),
-            'logout': users.create_logout_url(self.request.uri),
-		}
-		template = JINJA_ENVIRONMENT.get_template('stage4.html')
-		self.response.out.write(template.render(template_vars))
+		login = users.create_login_url(self.request.uri)
+		logout = users.create_logout_url(self.request.uri)
+		
+
+		self.render("stage4.html", title=title, user=user, login=login, logout=logout)
+
+class Admin(Handler):
+	def get(self):
+		title = "Admin"
+		user = users.get_current_user()
+		login = users.create_login_url(self.request.uri)
+		logout = users.create_logout_url(self.request.uri)
+
 
 app = webapp2.WSGIApplication([
 
-('/', Handler),
+('/', MainPage),
 ('/stage1', Stage1),
 ('/stage2', Stage2),
 ('/stage3', Stage3),
 ('/stage4', Stage4),
+#('/admin'), Admin),
+('/sign', Guestbook),
 ], debug=True)
 
 

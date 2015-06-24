@@ -4,14 +4,15 @@
 
 <div class="stage">
 	<h1>Stage 1: Make your Web Page</h1>
+		{% for concept in concepts_1_1 %}
   		<div class="lesson-title-box">
-  			<h2>Lesson 1: The basics of the web and HTML</h2>
-  				{% for concept in concepts_1_1 %}
+  			<h2>{{ concept[0] }}</h2>
+  				
 	  				<div class="concept">
-	  					<h3>{{ concept[0] }}</h3>		
+	  					<h3>{{ concept[1] }}</h3>		
 	  						<div class="content">
 	  							<p>
-	  								{{ concept[1] }}
+	  								{{ concept[2] }}
 	  							</p>
 	  						</div>
 	  				</div>
@@ -29,7 +30,7 @@
 	  						</p>
 	  					</div>
 	  			</div>
-	  		{% endfor %}	
+	  		{% endfor %}
   	</div>
 </div>
 {% endblock %}
