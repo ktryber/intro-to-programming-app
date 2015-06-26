@@ -67,9 +67,9 @@ class Greeting(ndb.Model):
 	date = ndb.DateTimeProperty(auto_now_add=True)
 
 class Stage1db(ndb.Model):
-	concepts_1_1_title = ndb.StringProperty(indexed=False)
-	concepts_1_1_content = ndb.StringProperty(indexed=False)
-	concepts_1_2 = ndb.StringProperty(indexed=False)
+	concepts_1_1_title = ndb.StringProperty(indexed=True)
+	concepts_1_1_content = ndb.StringProperty(indexed=True)
+	concepts_1_2 = ndb.StringProperty(indexed=True)
 
 ############### Handler #################
 class Handler(webapp2.RequestHandler):
@@ -162,7 +162,7 @@ class Stage1(Handler):
 		greetings = greetings_query.fetch(posts_to_fetch)
 
 		stage_1_name = self.request.get('stage_1_name', STAGE_1_CONCEPTS)
-		
+
 
 		
 		concepts_1_1 = [ 
@@ -331,13 +331,6 @@ class Stage4(Handler):
 
 		self.render("stage4.html", title=title, user=user, login=login, logout=logout)
 
-class Admin(Handler):
-	def get(self):
-		title = "Admin"
-		user = users.get_current_user()
-		login = users.create_login_url(self.request.uri)
-		logout = users.create_logout_url(self.request.uri)
-
 
 app = webapp2.WSGIApplication([
 
@@ -346,7 +339,6 @@ app = webapp2.WSGIApplication([
 ('/stage2', Stage2),
 ('/stage3', Stage3),
 ('/stage4', Stage4),
-#('/admin'), Admin),
 ('/sign', Guestbook),
 ], debug=True)
 
