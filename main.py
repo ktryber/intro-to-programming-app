@@ -50,8 +50,7 @@ def guestbook_key(guestbook_name=DEFAULT_GUESTBOOK_NAME):
     """
     return ndb.Key('Guestbook', guestbook_name)
 
-def stage_1_key(stage_1_name=STAGE_1_CONCEPTS):
-	return ndb.Key('Stage1Library', stage_1_name)
+
 
 ################# Datastore Models ############
 class Author(ndb.Model):
@@ -66,11 +65,11 @@ class Greeting(ndb.Model):
 	content = ndb.StringProperty(indexed=False)
 	date = ndb.DateTimeProperty(auto_now_add=True)
 
-class Stage1db(ndb.Model):
-	concepts_1_1_title = ndb.StringProperty(indexed=True)
-	concepts_1_1_content = ndb.StringProperty(indexed=True)
-	concepts_1_2 = ndb.StringProperty(indexed=True)
-
+class Notes_db(ndb.Model):
+	lesson_number = ndb.FloatProperty(indexed=True)
+	title_1 = ndb.StringProperty(indexed=False)
+	content_1 = ndb.StringProperty(indexed=False)
+	
 ############### Handler #################
 class Handler(webapp2.RequestHandler):
 	def write(self, *a, **kw):
@@ -105,24 +104,6 @@ class Guestbook(webapp2.RequestHandler):
 
 		query_params = {'guestbook_name': guestbook_name}
 		self.redirect('/?' + urllib.urlencode(query_params))
-
-class Stage1Library(webapp2.RequestHandler):
-	def post(self):
-		stage_1_name = self.request.get('stage_1_name', STAGE_1_CONCEPTS)
-
-		stage_1_concept = Stage1db(parent=stage_1_key(STAGE_1_CONCEPTS))
-
-
-		concepts_1_1 = [ 
-
-		["Lesson 1: The basics of the web and HTML", "HTML Notes", "Browsers are built to read pages of HTML code that then display text. HTML is written with a series of elements and tags that are organized in tree like structures from biggest to smallest. CSS then comes in to make that content have color, borders, flexible structure so that webpages can be viewed on different screen sizes, etc." ]
-		]
-
-		for concept_title in concepts_1_1[0]:
-			stage1db.concepts_1_1_title = self.request.get('concepts_1_1_title')
-			stage1db.put()
-
-		query_params = {'stage_1_name': stage_1_name}
 
 
 
