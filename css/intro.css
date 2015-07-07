@@ -28,6 +28,44 @@ p {
 font-family: 'ProximaNova', 'helvetica neue';
 }
 
+/***** Navigation Bar *******/
+.navigation-bar ul {
+list-style: none;
+background-color: #444;
+text-align: center;
+padding: 0;
+margin:0;
+}
+
+.navigation-bar li {
+	font-family: 'ProximaNova', 'helvetica neue';
+	font-size: 1.2em;
+	line-height: 40px;
+	height: 40px;
+	border-bottom: 1px solid #888;
+	display: inline-block;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+.navigation-bar a {
+	text-decoration: none;
+	color: #fff;
+	display: block;
+	transition: .3s background-color;
+}
+
+.navigation-bar a:hover {
+	background-color: #fff;
+}
+
+.navigation-bar a.active {
+	background-color: #fff;
+	color: #444;
+	cursor: default;
+}
+
+/***** Concept Boxes *******/
 .lesson-title-box {
 
 }
@@ -47,7 +85,7 @@ padding: 20px;
 background-color: #ffffff;
 }
 
-/* Box Model CSS */
+/***** Box Model CSS *******/
 .margin-color {
 color: #F8CB9C;
 }
@@ -89,3 +127,38 @@ position: relative;
 }
 
 /* End Model CSS */
+
+/***** Comment Entries *******/
+.comment-entries {
+	text-align: center;
+	font-family: 'ProximaNova', 'helvetica neue';
+	background-color: #ffffff;
+	border-radius: 10px;
+	width: 35%;
+	margin: 0 auto;
+
+}
+
+.comment-box {
+	width: 35%;
+	margin: 0 auto;
+}
+
+.comment-submit {
+	-webkit-user-select: none;
+	background:rgb(76, 142, 250);
+	border-radius: 2px;
+	box-sizing: border-box;
+	color: #fff;
+	cursor: pointer;
+	font-size:.875em;
+	margin: 0;
+	padding: 10px 5px;
+	
+
+}
+
+.comment-box p {
+	text-align: center;
+	font-family: 'ProximaNova', 'helvetica neue'; 
+}

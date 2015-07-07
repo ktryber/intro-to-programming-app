@@ -41,24 +41,36 @@
 	</body>
 
 	<footer>
-		
-		{% for greeting in greetings %}
-			{% if greeting.author %}
-				<b>{{ greeting.author.email }}
-					{% if user and user.user_id() == greeting.author.identity %}
-						(You)
-					{% endif %}
-				</b> wrote:
-			{% else %}
-			An anonymous person wrote:
-			{% endif %}
-			<blockquote>{{ greeting.content }}</blockquote>
-		{% endfor %}
+		<div class="comment-entries">
+			{% for greeting in greetings %}
+				{% if greeting.author %}
+					<b>{{ greeting.author.email }}
+						{% if user and user.user_id() == greeting.author.identity %}
+							(You)
+						{% endif %}
+					</b> wrote:
+				{% else %}
+				An anonymous person wrote:
+				{% endif %}
+				
+					<blockquote>{{ greeting.content }}</blockquote>
+			{% endfor %}
+		</div>
 
-		 <form action="/sign?guestbook_name={{ guestbook_name }}" method="post">
-      		<div><textarea name="content" rows="3" cols="60"></textarea></div>
-      		<div><input type="submit" value="Sign Guestbook"></div>
-    	</form>
+		<div class="comment-box">
+			{% if user %}
+			 <form action="/sign?guestbook_name={{ guestbook_name }}" method="post">
+
+	      		<div>
+	      			<textarea name="content" rows="3" cols="60"></textarea>
+	      		</div>
+
+	      		<div><input type="submit" class="comment-submit" value="Sign Guestbook"></div>
+	    	</form>
+	    	{% else %}
+	    	<p>Please sign in at the top of the page to leave a comment</p>
+	    	{% endif %}
+    	</div>
 
     	<hr>
 
@@ -66,10 +78,6 @@
     		<input value="{{ guestbook_name }}" name="guestbook_name">
       		<input type="submit" value="switch">
     	</form>-->
-
-    	
-
-
-		
+	
 	</footer>
 </html>

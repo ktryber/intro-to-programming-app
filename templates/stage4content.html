@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<div class="stage">
+	<h1>Stage 4: Allow Users to Comment</h1>
+		{% for concept in concepts_1_1 %}
+  		<div class="lesson-title-box">
+  			<h2>Networks</h2>
+	  				<div class="concept">
+	  					<h3>Network Definition</h3>		
+	  						<div class="content">
+	  							<p>
+	  								A network is a group of entities that can communicate, even though they are not directly connected.
+	  							</p>
+	  						</div>
+	  				</div>
+
+	  				<div class="concept">
+	  					<h3>Latency</h3>		
+	  						<div class="content">
+	  							<p>
+	  								The time it takes a message to get from the source to the destination. Measured in milliseconds (1000ms in a second).
+	  							</p>
+	  						</div>
+	  				</div>
+
+	  				<div class="concept">
+	  					<h3>Bandwidth</h3>		
+	  						<div class="content">
+	  							<p>
+	  								Amount of information that can be transmitted per unit.  Million bits per second.
+	  							</p>
+	  						</div>
+	  				</div>
+
+	  				<div class="concept">
+	  					<h3>Bit</h3>		
+	  						<div class="content">
+	  							<p>
+	  								Smallest unit of information	
+	  							</p>
+	  						</div>
+	  				</div>
+
+	  				<div class="concept">
+	  					<h3>Protocols</h3>		
+	  						<div class="content">
+	  							<p>
+	  								A set of rules that people agree to that tell you how two people can talk to each other.
+	  							</p>
+	  						</div>
+	  				</div>
+
+	  				<div class="concept">
+	  					<h3>HTTP</h3>		
+	  						<div class="content">
+	  							<p>
+	  								Hypertext transfer protocol
+	  							</p>
+	  						</div>
+	  				</div>
+	  			{% endfor %}
+	 	 </div>
+
+	 	 <div class="lesson-title-box">
+  			<h2>Make The Internet Work For You</h2>
+	  				<div class="concept">
+	  					<h3>URL</h3>		
+	  						<div class="content">
+	  							<p>
+	  								Uniform Resource Locator<br>
+	  								<ul>
+	  									<li>HTTP = Protocol</li>
+	  									<lI>www.udacity.com = Host</lI>
+	  									<li>/ = path</li>
+	  								</ul>	
+	  							</p>
+	  						</div>
+	  				</div>		
+
+	  				<div class="concept">
+	  					<h3>Query Parameters</h3>		
+	  						<div class="content">
+	  							<p>
+	  								Parameters come after the path in a url.  The first parameter is after the question mark in a url and the second and any following are seperated by an ampersand.
+	  							</p>
+	  						</div>
+	  				</div>
+
+	  				<div class="concept">
+	  					<h3>URL Fragments</h3>		
+	  						<div class="content">
+	  							<p>
+	  								Fragments are not sent to the server, usually used to access a section of the page.
+	  							</p>
+	  						</div>
+	  				</div>
+
+	  				<div class="concept">
+	  					<h3>Status Codes</h3>		
+	  						<div class="content">
+	  							<p>
+	  								<ul>
+	  									<li>200 ok = Found the document</li>
+	  									<li>302 found = document located somewhere else</li>
+	  									<li>404 not found = couldn't find the document</li>
+	  									<li>500 server error</li>
+	  								</ul>
+	  							</p>
+	  						</div>
+	  				</div>
+	  		</div>
+
+	  		<div class="lesson-title-box">
+  				<h2>Lesson 4: Modulus/Dictionaries</h2>
+	  				<div class="concept">
+	  					<h3>Dictionaries</h3>		
+	  						<div class="content">
+	  							<p>
+	  								A type in Python just like a string or a list. Dictionaries are created with a name like a variable and curly brackets.  Each item will have a key and a value.<br><br>
+
+	  								dictionary = {'h':1, 'b': 2, 'c':3}
+	  							</p>
+	  						</div>
+	  				</div>
+	  			{% endfor %}
+	 	 	</div>
+
+	 	 	<div class="lesson-title-box">
+  				<h2>Lesson 5: Working With the App Engine</h2>
+	  				<div class="concept">
+	  					<h3>Get vs. Post</h3>		
+	  						<div class="content">
+	  							<p>
+	  								Post:
+	  								<ul>
+	  									<li>Parameters in the request body</li>
+	  									<li>Used for updating data</li>
+	  									<li>not ok to cache</li>
+	  									<li>Ok to change the server</li>
+	  								</ul><br>
+	  								Get:
+	  								<ul>
+	  									<li>Parameters in the URL</li>
+	  									<li>Used for fetching documents</li>
+	  									<li>Ok to cache</li>
+	  									<li>Max URL length(2k characters)</li>
+	  								</ul>
+	  							</p>
+	  						</div>
+	  				</div>
+	  			{% endfor %}
+	 	 	</div>
+
+</div>

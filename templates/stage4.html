@@ -2,18 +2,91 @@
 
 {% block content %}
 	
-	<div class="lesson-title-box">
-		{% for lesson_title in lesson_title_boxes %}
-		<h2>{{ lesson_title }}</h2>
-		{% endfor %}
-			<div class="concept">
-				<div class="concept-title">
-					{% for title in titles %}
-					<h3>{{ title }}</h3>
-					{% endfor %}
-				</div>
+<div class="stage">
+	<h1>Stage 4: Allow Users to Comment</h1>
+  		<div class="lesson-title-box">
+  			<h2>Lesson 1: Networks</h2>
+  				{% for concept in concepts_4_1 %}
+	  				<div class="concept">
+	  					<h3>{{ concept[0] }}</h3>		
+	  						<div class="content">
+	  							<p>
+	  								{{ concept[1] }}
+	  							</p>
+	  						</div>
+	  				</div>
+	  			{% endfor %}
+	 	 </div>
+</div>
 
-		
-	</div>
+<div class="lesson-title-box">
+	<h2>Lesson 2: Make the Internet Work For You</h2>
+		{% for concept in concepts_4_2 %}
+			<div class="concept">
+				<h3>{{ concept[0] }}</h3>		
+					<div class="content">
+						<p>
+							{{ concept[1] }}
+						</p>
+					</div>
+			</div>
+		{% endfor %}
+</div>
+
+<div class="lesson-title-box">
+  	<h2>Lesson 4: Modulus/Dictionaries</h2>
+  		{% for concept in concepts_4_4 %}
+	  		<div class="concept">
+	  			<h3>{{ concept[0] }}</h3>		
+	  				<div class="content">
+	  					<p>
+	  						{{ concept[1] }}
+	  					</p>
+	  				</div>
+	  		</div>
+	  			{% endfor %}
+</div>
+
+<div class="lesson-title-box">
+	<h2>Lesson 5: Working With the App Engine</h2>
+		{% for concept in concepts_4_5 %}
+			<div class="concept">
+				<h3>{{ concept[0] }}</h3>		
+					<div class="content">
+						<p>
+							{{ concept[1] }}
+						</p>
+					</div>
+			</div>
+		{% endfor %}
+</div>
+
+<div class="lesson-title-box">
+	<h2>Lesson 6: Validation</h2>
+		{% for concept in concepts_4_5 %}
+			<div class="concept">
+				<h3>{{ concept[0] }}</h3>		
+					<div class="content">
+						<p>
+							{{ concept[1] }}
+						</p>
+					</div>
+			</div>
+		{% endfor %}
+</div>
+
+<div class="lesson-title-box">
+	<h2>Lesson 8: Databases</h2>
+		{% for concept in concepts_4_8 %}
+			<div class="concept">
+				<h3>{{ concept[0] }}</h3>		
+					<div class="content">
+						<p>
+							{{ concept[1] }}
+						</p>
+					</div>
+			</div>
+		{% endfor %}
+</div>
 
 {% endblock %}
