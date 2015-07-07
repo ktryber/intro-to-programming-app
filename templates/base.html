@@ -53,7 +53,7 @@
 				An anonymous person wrote:
 				{% endif %}
 				
-					<blockquote>{{ greeting.content }}</blockquote>
+					<blockquote>{{ greeting.content|e }}</blockquote>
 			{% endfor %}
 		</div>
 
@@ -62,7 +62,7 @@
 			 <form action="/sign?guestbook_name={{ guestbook_name }}" method="post">
 
 	      		<div>
-	      			<textarea name="content" rows="3" cols="60"></textarea>
+	      			<textarea name="content" rows="3" cols="60" value=""></textarea>
 	      		</div>
 
 	      		<div><input type="submit" class="comment-submit" value="Sign Guestbook"></div>
