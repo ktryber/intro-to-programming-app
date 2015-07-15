@@ -138,7 +138,7 @@ class Stage1(Handler):
 		greetings = greetings_query.fetch(posts_to_fetch)
 
 
-		self.render("stage1.html","stage2.html", "stage3.html", "stage4.html", title=title, user=user, login=login, logout=logout, greetings=greetings)
+		self.render("stage1.html", title=title, user=user, login=login, logout=logout, greetings=greetings)
 
 
 class Stage2(Handler):
