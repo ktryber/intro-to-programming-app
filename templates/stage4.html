@@ -5,88 +5,255 @@
 <div class="stage">
 	<h1>Stage 4: Allow Users to Comment</h1>
   		<div class="lesson-title-box">
-  			<h2>Lesson 1: Networks</h2>
-  				{% for concept in concepts_4_1 %}
+  			<h2>Networks</h2>
 	  				<div class="concept">
-	  					<h3>{{ concept[0] }}</h3>		
+	  					<h3>Network Definition</h3>		
 	  						<div class="content">
 	  							<p>
-	  								{{ concept[1] }}
+	  								A network is a group of entities that can communicate, even though they are not directly connected.
 	  							</p>
 	  						</div>
 	  				</div>
-	  			{% endfor %}
+
+	  				<div class="concept">
+	  					<h3>Latency</h3>		
+	  						<div class="content">
+	  							<p>
+	  								The time it takes a message to get from the source to the destination. Measured in milliseconds (1000ms in a second).
+	  							</p>
+	  						</div>
+	  				</div>
+
+	  				<div class="concept">
+	  					<h3>Bandwidth</h3>		
+	  						<div class="content">
+	  							<p>
+	  								Amount of information that can be transmitted per unit.  Million bits per second.
+	  							</p>
+	  						</div>
+	  				</div>
+
+	  				<div class="concept">
+	  					<h3>Bit</h3>		
+	  						<div class="content">
+	  							<p>
+	  								Smallest unit of information	
+	  							</p>
+	  						</div>
+	  				</div>
+
+	  				<div class="concept">
+	  					<h3>Protocols</h3>		
+	  						<div class="content">
+	  							<p>
+	  								A set of rules that people agree to that tell you how two people can talk to each other.
+	  							</p>
+	  						</div>
+	  				</div>
+
+	  				<div class="concept">
+	  					<h3>HTTP</h3>		
+	  						<div class="content">
+	  							<p>
+	  								Hypertext transfer protocol
+	  							</p>
+	  						</div>
+	  				</div>
+
 	 	 </div>
-</div>
 
-<div class="lesson-title-box">
-	<h2>Lesson 2: Make the Internet Work For You</h2>
-		{% for concept in concepts_4_2 %}
-			<div class="concept">
-				<h3>{{ concept[0] }}</h3>		
-					<div class="content">
-						<p>
-							{{ concept[1] }}
-						</p>
-					</div>
-			</div>
-		{% endfor %}
-</div>
+	 	 <div class="lesson-title-box">
+  			<h2>Make The Internet Work For You</h2>
+	  				<div class="concept">
+	  					<h3>URL</h3>		
+	  						<div class="content">
+	  							<p>
+	  								Uniform Resource Locator<br>
+	  								<ul>
+	  									<li>HTTP = Protocol</li>
+	  									<lI>www.udacity.com = Host</lI>
+	  									<li>/ = path</li>
+	  								</ul>	
+	  							</p>
+	  						</div>
+	  				</div>		
 
-<div class="lesson-title-box">
-  	<h2>Lesson 4: Modulus/Dictionaries</h2>
-  		{% for concept in concepts_4_4 %}
-	  		<div class="concept">
-	  			<h3>{{ concept[0] }}</h3>		
-	  				<div class="content">
-	  					<p>
-	  						{{ concept[1] }}
-	  					</p>
+	  				<div class="concept">
+	  					<h3>Query Parameters</h3>		
+	  						<div class="content">
+	  							<p>
+	  								Parameters come after the path in a url.  The first parameter is after the question mark in a url and the second and any following are separated by an ampersand.
+	  							</p>
+	  						</div>
+	  				</div>
+
+	  				<div class="concept">
+	  					<h3>URL Fragments</h3>		
+	  						<div class="content">
+	  							<p>
+	  								Fragments are not sent to the server, usually used to access a section of the page.
+	  							</p>
+	  						</div>
 	  				</div>
 	  		</div>
-	  			{% endfor %}
-</div>
 
-<div class="lesson-title-box">
-	<h2>Lesson 5: Working With the App Engine</h2>
-		{% for concept in concepts_4_5 %}
-			<div class="concept">
-				<h3>{{ concept[0] }}</h3>		
-					<div class="content">
-						<p>
-							{{ concept[1] }}
-						</p>
-					</div>
-			</div>
-		{% endfor %}
-</div>
+	  		<div class="lesson-title-box">
+  				<h2>How Servers Handle Requests/Responses</h2>
+	  				<div class="concept">
+	  					<h3>Requests</h3>		
+	  						<div class="content">
+	  							<p>
+	  								Files (HTML, Python) when live on the web are hosted on servers.  Servers are essentially large hard drives built to store files that we publish to the web. All of these servers are connected within a network (world wide web). Whenever we want to get access to these files we use the web browser and the URL which is the location of the file that we want to retrieve.<br><br>
 
-<div class="lesson-title-box">
-	<h2>Lesson 6: Validation</h2>
-		{% for concept in concepts_4_6 %}
-			<div class="concept">
-				<h3>{{ concept[0] }}</h3>		
-					<div class="content">
-						<p>
-							{{ concept[1] }}
-						</p>
-					</div>
-			</div>
-		{% endfor %}
-</div>
+	  								HTTP (hypertext transfer protocol) is the language used to talk to web servers. For your browser to get to your desired web address it first starts with the request line.  The request line has 3 parts, method, path and version.<br><br>
 
-<div class="lesson-title-box">
-	<h2>Lesson 8: Databases</h2>
-		{% for concept in concepts_4_8 %}
-			<div class="concept">
-				<h3>{{ concept[0] }}</h3>		
-					<div class="content">
-						<p>
-							{{ concept[1] }}
-						</p>
+	  								<b>Method</b>: The type of request we want to make (GET/POST).<br><br> 
+
+	  								<b>Path:</b> The document we are requesting (<a href="https://www.udacity.com/course/introduction-to-programming-nanodegree--nd000"></a>). In this URL udacity.com is the server I am are trying to contact and within that server I would like to retrieve the homepage of this nanodegree (introduction-to-programming-nanodegree--nd000).<br><br>
+
+	  								<b>Version:</b> Most browsers use version 1.1, 1.0 can also be used.<br><br>
+	  							</p>
+	  						</div>
+	  				</div>
+
+					<div class="concept">
+						<h3>Responses</h3>		
+							<div class="content">
+								<p>
+									A response happens after we make the request. An HTTP response produces a status line.  It has the version just like the request line and they must match. The status line also has a status code and a reason phrase. If we get a status code that starts with a 2 (200) that means the request is ok and the server responds with the document.<br><br>
+
+									<b>status codes</b>
+									<ul>
+	  									<li>200 OK = Found the document</li>
+	  									<li>302 found = document located somewhere else</li>
+	  									<li>404 not found = couldn't find the document</li>
+	  									<li>500 server error</li>
+	  								</ul>
+								</p>
+							</div>
 					</div>
-			</div>
-		{% endfor %}
+
+					<div class="concept">
+						<h3>Servers</h3>		
+							<div class="content">
+								<p>
+									<b>Purpose:</b>Respond to HTTP requests.<br><br>
+
+									There are two types of responses a server will have, static and dynamic.<br><br>
+
+									<b>Static:</b>Pre-written files like images.<br>
+									<b>Dynamic:</b>Response that is built on the fly, web applications. 
+								</p>
+							</div>
+					</div>
+	  		</div>
+
+	  		<div class="lesson-title-box">
+  				<h2>Lesson 4: Modulus/Dictionaries</h2>
+	  				<div class="concept">
+	  					<h3>Dictionaries</h3>		
+	  						<div class="content">
+	  							<p>
+	  								A type in Python just like a string or a list. Dictionaries are created with a name like a variable and curly brackets.  Each item will have a key and a value.<br><br>
+
+	  								dictionary = {'h':1, 'b': 2, 'c':3}
+	  							</p>
+	  						</div>
+	  				</div>
+	 	 	</div>
+
+	 	 	<div class="lesson-title-box">
+  				<h2>Lesson 5: Working With the App Engine</h2>
+	  				<div class="concept">
+	  					<h3>Get vs. Post</h3>		
+	  						<div class="content">
+	  							<p>
+	  								Post:
+	  								<ul>
+	  									<li>Parameters in the request body</li>
+	  									<li>Used for updating data</li>
+	  									<li>not ok to cache</li>
+	  									<li>OK to change the server</li>
+	  								</ul><br>
+	  								Get:
+	  								<ul>
+	  									<li>Parameters in the URL</li>
+	  									<li>Used for fetching documents</li>
+	  									<li>OK to cache</li>
+	  									<li>Max URL length(2k characters)</li>
+	  								</ul>
+	  							</p>
+	  						</div>
+	  				</div>
+	 	 	</div>
+
+	 	 	<div class="lesson-title-box">
+  				<h2>Lesson 6: Validation</h2>
+	  				<div class="concept">
+	  					<h3>Validation</h3>		
+	  						<div class="content">
+	  							<p>
+	  								We always want to verify on the server side that we receive what we expected to receive.<br><br>
+	  								When you have forms or user inputs on your website or app, we need to limit what the user can enter so that they don't have the opportunity to enter malicious content into our forms. We can do that by adding things like drop downs or data validation into our code.
+	  							</p>
+	  						</div>
+	  				</div>
+
+	  				<div class="concept">
+	  					<h3>Validation Example</h3>		
+	  						<div class="content">
+	  							<p>
+	  								In our Birthday form that we made during lesson 4 we created a separate file strictly for validation<br><br>
+
+	  								<img src="/screenshots/Lesson4validation.png"><br><br>
+
+	  								Then we pulled that file in by importing it. <br><br>
+	  								<img src="/screenshots/validationimport.png"><br><br>
+
+	  								We can then use our code within our form_validation file.  In this case we built validation for the month, day and year. To validate first we requested the content, then created variables using our validation functions.<br><br>
+	  								<img src="/screenshots/validatingMonthDayYear.png"><br><br>
+
+	  								This is important because forms on websites can targets for hacking and malicious content. So whenever we install a form we want to make sure that the user is only allowed to input what we have intended for them to input.
+	  							</p>
+	  						</div>
+	  				</div>
+	 	 	</div>
+
+	 	 	<div class="lesson-title-box">
+  				<h2>Lesson 8: Databases</h2>
+	  				<div class="concept">
+	  					<h3>Database</h3>		
+	  						<div class="content">
+	  							<p>
+	  								A program that stores, structures and retrieves data.
+	  							</p>
+	  						</div>
+	  				</div>
+
+	  				<div class="concept">
+	  					<h3>Database Transactions: ACID</h3>		
+	  						<div class="content">
+	  							<p>
+	  								Atomicity: All parts of a transaction succeed or fail together.<br>
+	  								Consistency: The database will always be consistent.<br>
+	  								Isolation: No transaction can interfere with another<br>
+	  								Durability: Once the transaction is committed, it wont be lost.
+	  							</p>
+	  						</div>
+	  				</div>
+	 	 	</div>
+
+	 	 	<div class="lesson-title-box">
+  				<h2>HTML Templates/Repetition</h2>
+	  				<div class="concept">
+	  					<h3>Templates</h3>		
+	  						<div class="content">
+	  							<p>
+	  								Templates are used in web applications when things need to be replicated.  By using templates we can reduce the amount of errors in our code. Also if we ever needed to change something that appears multiple times on our web application we can change it in one spot and have that change be made everywhere. In my web application I have a base.html file that I can insert in any of my pages. This file contains my navigation bar and my comments section.  Now as I add pages to my site and my navigation gets more complex all I need to do is change the navigation list in one file and it will update everywhere.
+	  							</p>
+	  						</div>
+	  				</div>
+
 </div>
 
 {% endblock %}

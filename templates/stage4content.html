@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <div class="stage">
 	<h1>Stage 4: Allow Users to Comment</h1>
-		{% for concept in concepts_1_1 %}
   		<div class="lesson-title-box">
   			<h2>Networks</h2>
 	  				<div class="concept">
@@ -57,7 +56,7 @@
 	  							</p>
 	  						</div>
 	  				</div>
-	  			{% endfor %}
+
 	 	 </div>
 
 	 	 <div class="lesson-title-box">
@@ -121,7 +120,6 @@
 	  							</p>
 	  						</div>
 	  				</div>
-	  			{% endfor %}
 	 	 	</div>
 
 	 	 	<div class="lesson-title-box">
@@ -147,7 +145,6 @@
 	  							</p>
 	  						</div>
 	  				</div>
-	  			{% endfor %}
 	 	 	</div>
 
 	 	 	<div class="lesson-title-box">
@@ -166,13 +163,20 @@
 	  					<h3>Validation Example</h3>		
 	  						<div class="content">
 	  							<p>
-	  								In our Birthday form that we made during lesson 4 we created a separate file strictly for validation that we then pulled into our main python file that generated the form.<br><br>
+	  								In our Birthday form that we made during lesson 4 we created a separate file strictly for validation<br><br>
 
-	  								<img src="screenshots/lesson4validation.pdf">
+	  								<img src="/screenshots/lesson4validation.pdf"><br><br>
+
+	  								Then we pulled that file in by importing it. <br><br>
+	  								<img src="/screenshots/validationimport.png"><br><br>
+
+	  								We can then use our code within our form_validation file.  In this case we built validation for the month, day and year. To validate first we requested the content, then created variables using our validation functions.<br><br>
+	  								<img src="/screenshots/validatingMonthDayYear.png"><br><br>
+
+	  								This is important because forms on websites can targets for hacking and malicious content. So whenever we install a form we want to make sure that the user is only allowed to input what we have intended for them to input.
 	  							</p>
 	  						</div>
 	  				</div>
-	  			{% endfor %}
 	 	 	</div>
 
 	 	 	<div class="lesson-title-box">
