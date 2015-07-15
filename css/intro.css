@@ -162,3 +162,13 @@ position: relative;
 	text-align: center;
 	font-family: 'ProximaNova', 'helvetica neue'; 
 }
+
+.comment-error {
+	font-size: 25px;
+	text-align: center;
+	background: white;
+	border-radius: 10px;
+	width: 35%;
+	margin: 25px auto;
+	font-family: 'ProximaNova', 'helvetica neue';
+}

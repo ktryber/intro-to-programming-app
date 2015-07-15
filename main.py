@@ -27,6 +27,7 @@ jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir), a
 
 DEFAULT_GUESTBOOK_NAME = 'default_guestbook'
 
+
 ################# Datastore Keys ############
 def guestbook_key(guestbook_name=DEFAULT_GUESTBOOK_NAME):
     """Constructs a Datastore key for a Guestbook entity.
@@ -84,11 +85,19 @@ class Guestbook(webapp2.RequestHandler):
 				identity=users.get_current_user().user_id(),
 				email=users.get_current_user().email())
 
-		
-		if self.request.get('content').strip():
+		content = self.request.get("content").strip()
+		comment_error = "whoops, it looks like your comment is invalid"
+
+		if content and not content.isspace():
+			greeting.content = content
 			greeting.put()
-			query_params = {'guestbook_name': guestbook_name}
-			self.redirect('/?' + urllib.urlencode(query_params))
+			comment_error = ""
+			
+		else:
+			comment_error
+
+		query_params = {'guestbook_name': guestbook_name, 'comment_error':comment_error}
+		self.redirect('/?' + urllib.urlencode(query_params))
 		
 
 
@@ -104,15 +113,15 @@ class MainPage(Handler):
 		login = users.create_login_url(self.request.uri)
 		logout = users.create_logout_url(self.request.uri)
 		user = users.get_current_user()
-
+		comment_error = self.request.get('comment_error')
+	
 		
 	
-		guestbook_name = self.request.get('guestbook_name', DEFAULT_GUESTBOOK_NAME)
 		greetings_query = Greeting.query(ancestor=guestbook_key(DEFAULT_GUESTBOOK_NAME)).order(-Greeting.date)
 		greetings = greetings_query.fetch(POSTS_TO_FETCH)
 		
 
-		self.render("base.html", title=title, user=user, login=login, logout=logout, greetings=greetings,)
+		self.render("base.html", title=title, user=user, login=login, logout=logout, greetings=greetings, comment_error=comment_error)
 
 
 class Stage1(Handler):
@@ -121,17 +130,15 @@ class Stage1(Handler):
 		user = users.get_current_user()
 		login = users.create_login_url(self.request.uri)
 		logout = users.create_logout_url(self.request.uri)
-
 		
 
 		#comments stage 1
-		guestbook_name = self.request.get('guestbook_name', DEFAULT_GUESTBOOK_NAME)
 		posts_to_fetch = 10
 		greetings_query = Greeting.query(ancestor=guestbook_key(DEFAULT_GUESTBOOK_NAME)).order(-Greeting.date)
 		greetings = greetings_query.fetch(posts_to_fetch)
 
 
-		self.render("stage1.html", title=title, user=user, login=login, logout=logout, greetings=greetings)
+		self.render("stage1.html","stage2.html", "stage3.html", "stage4.html", title=title, user=user, login=login, logout=logout, greetings=greetings)
 
 
 class Stage2(Handler):
@@ -141,7 +148,6 @@ class Stage2(Handler):
 		login = users.create_login_url(self.request.uri)
 		logout = users.create_logout_url(self.request.uri)
 
-		guestbook_name = self.request.get('guestbook_name', DEFAULT_GUESTBOOK_NAME)
 		posts_to_fetch = 10
 		greetings_query = Greeting.query(ancestor=guestbook_key(DEFAULT_GUESTBOOK_NAME)).order(-Greeting.date)
 		greetings = greetings_query.fetch(posts_to_fetch)
@@ -156,7 +162,6 @@ class Stage3(Handler):
 		login = users.create_login_url(self.request.uri)
 		logout = users.create_logout_url(self.request.uri)
 
-		guestbook_name = self.request.get('guestbook_name', DEFAULT_GUESTBOOK_NAME)
 		posts_to_fetch = 10
 		greetings_query = Greeting.query(ancestor=guestbook_key(DEFAULT_GUESTBOOK_NAME)).order(-Greeting.date)
 		greetings = greetings_query.fetch(posts_to_fetch)
@@ -171,7 +176,6 @@ class Stage4(Handler):
 		login = users.create_login_url(self.request.uri)
 		logout = users.create_logout_url(self.request.uri)
 
-		guestbook_name = self.request.get('guestbook_name', DEFAULT_GUESTBOOK_NAME)
 		posts_to_fetch = 10
 		greetings_query = Greeting.query(ancestor=guestbook_key(DEFAULT_GUESTBOOK_NAME)).order(-Greeting.date)
 		greetings = greetings_query.fetch(posts_to_fetch)
