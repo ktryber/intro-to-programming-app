@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="stage">
+	<h1>Stage 5 Lesson 1: Javascript</h1>
+	 	 <div class="lesson-title-box">
+	 	 	<h2>Lesson 1: Meet Javascript</h2>
+	 	 		<div class="concept">
+	 	 			<h3>Javascript</h3>
+	 	 				<div class="content">
+	 	 					<p>
+	 	 						The programming language of the web. Javascript interacts directly with your HTML.
+	 	 					</p>
+	 	 				</div>
+	 	 		</div>
+	 	 
+		 		<div class="concept">
+		 			<h3>Adding Javascript</h3>
+		 				<div class="content">
+		 					<p>
+		 						There is two ways you can add javascript to your html similar to how you add CSS. The first way is to write your javascript inside of a script tag inside of your html.  The other way is to create a separate file with the extension .js
+		 					</p>
+		 				</div>
+		 		</div>
+
+		 		<div class="concept">
+					<h3>Javascript Variables</h3>		
+						<div class="content">
+							<p>
+								var variableName = someValue<br><br>
+
+								var declares a new variables for all data types. the main difference between python and javascript is the keyword “var"
+							</p>
+						</div>
+				</div>
+
+				<div class="concept">
+					<h3>Loading Javascript into HTML</h3>		
+						<div class="content">
+							<p>
+								Javascript files load within HTML in the order that they are placed within the HTML code.
+							</p>
+						</div>
+				</div>
+
+				<div class="concept">
+					<h3>Truthy vs. Falsy</h3>		
+						<div class="content">
+							<p>
+								Evaluate to True:<br>
+								<ul>
+									<li>True</li>
+									<li>non-zero numbers</li>
+									<li>"strings"</li>
+									<li>objects</li>
+									<li>arrays</li>
+									<li>functions</li>
+								</ul><br><br>
+
+								Evaluate to False:
+								<ul>
+									<li>False</li>
+									<li>0</li>
+									<li>"" empty string</li>
+									<li>undefined = variable does not exist</li>
+									<li>null = variable exists but no value (usually a placeholder)</li>
+									<li>NaN = not a number</li>
+								</ul>	
+							</p>
+						</div>
+			  	</div>
+
+			  	<div class="concept">
+					<h3>Arrays</h3>		
+						<div class="content">
+							<p>
+								Arrays in javascript are just like lists in python and behave the same way.<br><br>
+
+								var myArray = [item_1, item_n]
+							</p>
+						</div>
+				</div>
+
+				<div class="concept">
+					<h3>Array Manipulation Solution In My Own Words:</h3>		
+						<div class="content">
+							<p>
+								The goal, if given an array of numbers can you increase the value of the last number in the array by one.<br><br>
+
+								function incrementLastArrayElement(_array)<br>  
+								{<br>
+		    						var newArray = [];<br>
+								    newArray = _array.slice(0);<br>
+								    var lastNumber = newArray.pop();<br>
+								    newArray.push(lastNumber + 1);<br>
+								    return newArray;<br>
+								}<br><br>
+
+								<ol>
+									<li>The array in question is passed into the function incrementLastArrayElement. That array technically could be one number or 100 all we care about is whatever is last.</li>
+									<li>Since we will be adjusting that array, first we will copy it into a new variable using .slice().  .slice() will extract the elements from the beginning up to the end. In this example we want to extract the whole array and store it into a new array<br><br>var newArray = _array.slice(0);</li>
+									<li>Now we need to increase our lasNumber by 1 and insert it back into the array using .push().<br><br>newArray.push(lastNumber + 1);</li>
+								</ol>
+							</p>
+						</div>
+				</div>
+
+				<div class="concept">
+					<h3>Objects</h3>		
+						<div class="content">
+							<p>
+								- Javascript does not have classes only objects.<br><br>
+
+								- Object literal notation includes var objectName = { };<br><br>
+
+								var bio = {<br>
+											    "name" : "james",<br>
+											    "age" : 25,<br>
+											    "skills" : skills,<br>
+											};<br><br>
+
+								- We can add new properties to an object using dot notation. In the example above we could add things to bio using dot notation ex:<br><br>
+								bio.city = “Columbia”;<br>
+								bio.email = “ktryber@gmail.com”;<br><br>
+
+								- You can then append them to the page using dot notation and append.<br><br>
+
+								- 3 ways of defining objects:
+								<ul>
+									<li>var myObject = { }; object literal notation</li>
+									<li>myObject.property = someValue; dot notation</li>
+									<li>myObject[“property”] = someValue; bracket notation</li>
+								</ul>
+							</p>
+						</div>
+				</div>
+
+				<h2></h2>
+					<div class="concept">
+						<h3>What is JSON?</h3>		
+							<div class="content">
+								<p>
+									- Javascript Object Notation<br><br>
+
+									- JSON is a simple and popular format for storing and transferring nested or hierarchal data. Most languages have libraries capable of parsing and writing JSON.
+								</p>
+							</div>
+					</div>
+			</div>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

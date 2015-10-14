@@ -1,0 +1,235 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="stage">
+	<h1>Stage 5: Explore Relational Databases</h1>
+		<div class="lesson-title-box">
+			<h2>Table of Contents</h2>
+				<div class="content">
+					<p>
+						<ul>
+							<li><a href="#lesson1">Lesson 1: Data and Tables</a></li>
+							<li><a href="#lesson2">Lesson 2: Elements of SQL</a></li>
+							<li><a href="#lesson3">Lesson 3: Python DB-API</a></li>
+							<li><a href="#lesson4">Lesson 4: Deeper Into SQL</a></li>
+						</ul>
+					</p>
+				</div>
+	  	</div>
+
+	  	<div class="lesson-title-box">
+  			<h2>Lesson 1: Data and Tables<a name="lesson1"></a></h2>
+	  			<div class="concept">
+	  				<h3>How We Currently Store Application Data:</h3>		
+	  					<div class="content">
+	  						<p>
+	  							In Memory: "temporary memory"
+	  							<ul>
+	  								<li>Simple Variables: numbers/strings</li>
+	  								<li>Data Structures: lists, dictionaries, object</li>
+	  							</ul>
+	  							Durable Storage: persistant, durable
+	  							<ul>
+	  								<li>Flat Files on disk:
+	  									<li>text</li>
+	  									<li>xml</li>
+	  									<li>json</li>
+	  								</li>
+	  							</ul>
+	  							Databases:
+	  							<ul>
+	  								<li>key-value store</li>
+	  								<li>navigational DB</li>
+	  								<li>relational DB</li>
+	  								<li>persistant storage</li>
+	  								<li>safe concurrent access by multiple programs/users</li>
+	  							</ul>
+	  							Relational Database Features:
+	  							<ul>
+	  								<li>Flexible query language with aggregation and join operations.</li>
+	  								<li>Constraints rules for protecting consistency of your data.</li>
+	  							</ul>
+	  						</p>
+	  					</div>
+	  			</div>
+
+	  			<div class="concept">
+  					<h3>Common Aggregations</h3>		
+  						<div class="content">
+  							<p>
+  								<ul>
+  									<li>Count</li>
+  									<li>Avg</li>
+  									<li>Max</li>
+  									<li>Min</li>
+  									<li>Sum</li>
+  								</ul>
+  							</p>
+  						</div>
+  				</div>
+  		</div>
+
+  		<div class="lesson-title-box">
+			<h2>Lesson 2: Elements of SQL<a name="lesson2"></a></h2>
+				<div class="concept">
+					<h3>SQL Types:</h3>
+						<div class="content">
+							<p>
+								<ul>
+									<li>Text - A string of any length, like Python str or unicode types. use single quotes
+										<li>char(n) - a string of exactly n characters.</li>
+										<li>varchar(n) - A string of up to n characters</li>
+									</li>
+									<li>Integer - An integer value, like Python int. Use single quotes.
+										<li>Real - A floating-point value, like Python float, accurate up to 6 decimals</li>
+										<li>Double Precision - A higher-precision floating-point value. Accurate up to 15 decimal places.</li>
+										<li>Decimal - An exact decimal value</li>
+									</li>
+									<li>Date - 2015-01-29 use single quotes
+										<li>Time - a time of day</li>
+										<li>Timestamp - A date and time together</li>
+									</li>
+								</ul>
+							</p>
+						</div>
+				</div>
+
+				<div class="concept">
+  					<h3>Select Where:</h3>		
+  						<div class="content">
+  							<p>
+  								select name from animals where species != 'gorilla' and name != 'Max':
+  							</p>
+  						</div>
+  				</div>
+
+  				<div class="concept">
+  					<h3>Comparison Operators</h3>		
+  						<div class="content">
+  							<p>
+  								 - = < > <= >= !=
+  							</p>
+  						</div>
+  				</div>
+
+  				<div class="concept">
+  					<h3>Select Clauses:</h3>		
+  						<div class="content">
+  							<p>
+  								<ul>
+  									<li>Limit count - Allows you to return a certain amount of rows.</li>
+  									<li>Offset skip - How far into the results to start.</li>
+  									<li>Order By columns</li>
+  									<li>Group By</li>
+  								</ul>
+  							</p>
+  						</div>
+  				</div>
+
+  				<div class="concept">
+  					<h3>Insert: adding rows</h3>		
+  						<div class="content">
+  							<p>
+  								<ul>
+  									<li>To add a row: Insert into table values (42, 'stuff');</li>
+  									<li>if the new values aren’t in the same order: Insert into table (col2, col1) values (‘stuff’, 42);</li>
+  								</ul>
+  							</p>
+  						</div>
+  				</div>
+	  	</div>
+
+	  	<div class="lesson-title-box">
+			<h2>Lesson 3: Python DB-API<a name="lesson3"></a></h2>
+				<div class="concept">
+					<h3>DB-API</h3>
+						<div class="content">
+							<p>
+								Behind the web servers, python code runs and connects to an sqlite database
+							</p>
+						</div>
+				</div>
+
+				<div class="concept">
+					<h3>Steps for an sqlite3 database:</h3>
+						<div class="content">
+							<p>
+								<ol>
+									<li>import sqlite3</li>
+									<li>conn = sqlite3.connect("Cookies")</li>
+									<li>cursor = conn.cursor()</li><br><br>
+									<li>cursor.execute("select host_key from cookies limit 10")</li>
+									<li>results = cursor.fetchall()</li>
+									<li>print results</li>
+									<li>conn.close()</li>
+								</ol>
+							</p>
+						</div>
+				</div>
+
+				<div class="concept">
+					<h3>Inserts into DB:</h3>
+						<div class="content">
+							<p>
+								After executing your queries you need to db.commit() your changes into the database.
+							</p>
+						</div>
+				</div>
+
+				<div class="concept">
+					<h3>Atomicity:</h3>
+						<div class="content">
+							<p>
+								A transaction happens as a whole or not at all.
+							</p>
+						</div>
+				</div>
+		</div>
+
+		<div class="lesson-title-box">
+  			<h2>Lesson 4: Deeper Into SQL<a name="lesson4"></a></h2>
+	  			<div class="concept">
+	  				<h3>Lesson 4 Reference Notes</h3>		
+	  					<div class="content">
+	  						<p>
+	  							<a href="https://www.udacity.com/wiki/ud197/lesson-4">Lesson 4 Reference Notes</a>
+	  						</p>
+	  					</div>
+	  			</div>
+
+	  			<div class="concept">
+	  				<h3>Normalized Design:</h3>		
+	  					<div class="content">
+	  						<p>
+		  						<ol>
+		  							<li>Every row has the same number of columns.</li>
+		  							<li>There is a unique key and everything in a row says something about the key.</li>
+		  							<li>Facts that don't relate to the key below in different tables</li>
+		  							<li>Tables shouldn't imply relationships that don't exist.</li>
+		  						</ol>
+	  						</p>
+	  					</div>
+	  			</div>
+
+	  			<div class="concept">
+	  				<h3>Primary Keys</h3>		
+	  					<div class="content">
+	  						<p>
+	  							A column or columns that uniquely identify what each row in a table is about.
+	  						</p>
+	  					</div>
+	  			</div>
+
+	  			<div class="concept">
+	  				<h3>Declaring Relationships</h3>		
+	  					<div class="content">
+	  						<p>
+	  							References: provides referential integrity columns that are supposed to refer to each other are guaranteed to do so.
+	  						</p>
+	  					</div>
+	  			</div>
+	  	</div>
+</div>
+
+{% endblock %}

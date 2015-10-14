@@ -183,6 +183,44 @@ class Stage4(Handler):
 
 		self.render("stage4.html", greetings=greetings, title=title, user=user, login=login, logout=logout)
 
+class Stage5javascript(Handler):
+	def get(self):
+		title = "Kris Tryber Intro to Programming Stage 5"
+		user = users.get_current_user()
+		login = users.create_login_url(self.request.uri)
+		logout = users.create_logout_url(self.request.uri)
+
+		posts_to_fetch = 10
+		greetings_query = Greeting.query(ancestor=guestbook_key(DEFAULT_GUESTBOOK_NAME)).order(-Greeting.date)
+		greetings = greetings_query.fetch(posts_to_fetch)
+
+		self.render("stage5javascript.html", greetings=greetings, title=title, user=user, login=login, logout=logout)
+
+class Stage5api(Handler):
+	def get(self):
+		title = "Kris Tryber Intro to Programming Stage 5"
+		user = users.get_current_user()
+		login = users.create_login_url(self.request.uri)
+		logout = users.create_logout_url(self.request.uri)
+
+		posts_to_fetch = 10
+		greetings_query = Greeting.query(ancestor=guestbook_key(DEFAULT_GUESTBOOK_NAME)).order(-Greeting.date)
+		greetings = greetings_query.fetch(posts_to_fetch)
+
+		self.render("stage5api.html", greetings=greetings, title=title, user=user, login=login, logout=logout)
+
+class RelationalDatabases(Handler):
+	def get(self):
+		title = "Kris Tryber Intro to Programming Stage 5"
+		user = users.get_current_user()
+		login = users.create_login_url(self.request.uri)
+		logout = users.create_logout_url(self.request.uri)
+
+		posts_to_fetch = 10
+		greetings_query = Greeting.query(ancestor=guestbook_key(DEFAULT_GUESTBOOK_NAME)).order(-Greeting.date)
+		greetings = greetings_query.fetch(posts_to_fetch)
+
+		self.render("relational.html", greetings=greetings, title=title, user=user, login=login, logout=logout)
 
 app = webapp2.WSGIApplication([
 
@@ -191,6 +229,9 @@ app = webapp2.WSGIApplication([
 ('/stage2', Stage2),
 ('/stage3', Stage3),
 ('/stage4', Stage4),
+('/stage5javascript', Stage5javascript),
+('/stage5api', Stage5api),
+('/relationaldatabases', RelationalDatabases),
 ('/sign', Guestbook),
 ], debug=True)
 

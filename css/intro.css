@@ -28,6 +28,14 @@ p {
 font-family: 'ProximaNova', 'helvetica neue';
 }
 
+li {
+	font-family: 'ProximaNova', 'helvetica neue';
+}
+
+div {
+	font-family: 'ProximaNova', 'helvetica neue';
+}
+
 /***** Navigation Bar *******/
 .navigation-bar ul {
 list-style: none;

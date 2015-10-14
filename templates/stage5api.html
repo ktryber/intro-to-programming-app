@@ -1,0 +1,229 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="stage">
+	<h1>Stage 5</h1>
+		<div class="lesson-title-box">
+			<h2>Table of Contents</h2>
+				<div class="content">
+					<p>
+						<ul>
+							<li><a href="#api">Lesson 2: API's</a></li>
+							<li><a href="#recursion">Lesson 3: Recursion and Parallel Computing</a></li>
+							<li><a href="#bigproblems">Lesson 4: Solving Big Problems</a></li>
+						</ul>
+					</p>
+				</div>
+	  	</div>
+
+  		<div class="lesson-title-box">
+  			<h2>API's<a name="api"></a></h2>
+	  			<div class="concept">
+	  				<h3>API Definition</h3>		
+	  					<div class="content">
+	  						<p>
+	  							- Application programming interface.<br><br>
+	  							- Allows our websites and web apps to communicate with other computers to retrieve and send data.
+	  						</p>
+	  					</div>
+	  			</div>
+
+	  			<div class="concept">
+	  				<h3></h3>		
+	  					<div class="content">
+	  						<p>
+	  							
+	  						</p>
+	  					</div>
+	  			</div>
+
+	  			<div class="concept">
+	  				<h3>XML</h3>		
+	  					<div class="content">
+	  						<p>
+	  							- A regular for expressing data between computer systems.
+	  						</p>
+	  					</div>
+	  			</div>
+
+	  			<div class="concept">
+	  				<h3>DOM</h3>		
+	  					<div class="content">
+	  						<p>
+	  							- Document Object Model - The internal representation of an xml document.
+	  						</p>
+	  					</div>
+	  			</div>
+
+	  			<div class="concept">
+	  				<h3>** side note</h3>		
+	  					<div class="content">
+	  						<p>
+								- toprettyxml() allows you to view an xml document, if you print x.toprettyxml() it will show it to you with indentation.
+	  						</p>
+	  					</div>
+	  			</div>
+
+	  			<div class="concept">
+	  				<h3>JSON</h3>		
+	  					<div class="content">
+	  						<p>
+	  						Available data types in JSON: int, strings, boolean, float and null
+
+	  						<ul>
+	  							<li>int = 1</li>
+	  							<li>strings = 'hello'</li>
+	  							<li>boolean = True or False</li>
+	  							<li>float - 5.6</li>
+	  							<li>null = [ ]</li>
+	  						</ul>
+	  							
+	  						</p>
+	  					</div>
+	  			</div>
+
+	  			<div class="concept">
+	  				<h3>How to be a good citizen on the internet</h3>		
+	  					<div class="content">
+	  						<p>
+	  							<ul>
+	  								<li>Use a good user-agent</li>
+	  								<li>rate-limit yourself<br><br>ex:<br>
+	  									import time<br>
+	  									while more:<br>
+	  									get_more()<br>
+	  									time.sleep(1)</li>
+	  							</ul>
+	  						</p>
+	  					</div>
+	  			</div>
+
+	  			<div class="concept">
+	  				<h3>Other common protocols and formatting for communicating across the internet</h3>		
+	  					<div class="content">
+	  						<p>
+	  							<ul>
+	  								<li>SOAP (microsoft)</li>
+	  								<li>Protocol Buffers (google)</li>
+	  								<li>Thrift (facebook)</li>
+	  								<li>Plain-text, custom formats</li>
+	  								<li>XML</li>
+	  								<li>JSON</li>
+	  							</ul>
+	  						</p>
+	  					</div>
+	  			</div>
+
+
+	 	 </div>
+
+  		<div class="lesson-title-box">
+  			<h2>Lesson 3: Recursion and Parallel Computing<a name="recursion"></a></h2>
+	  			<div class="concept">
+	  				<h3>Recursion Definitions</h3>		
+	  					<div class="content">
+	  						<p>
+	  							Two Parts:
+	  							<ol>
+	  								<li>Base Case - A Starting Point<br>
+	  								- not defined in terms of itself<br>
+	  								- smallest input - already know the answer</li>
+	  								<li>Recursive Case<br>
+	  									- Defined in terms of "smaller" version of itself.</li>
+	  							</ol>
+	  						</p>
+	  					</div>
+	  			</div>
+
+	  			<div class="concept">
+	  				<h3>Defining Procedures Recursively</h3>		
+	  					<div class="content">
+	  						<p>
+	  							- Define a procedure, factorial, that takes a natural number as its input, and returns the number of ways to arrange the input number of items.<br><br>
+	  							ex:<br>
+	  							def factorial(n):<br>
+								    if n == 0:<br>
+								        return 1<br>
+								    else:<br>
+								        return n * factorial(n-1)<br>
+	  						</p>
+	  					</div>
+	  			</div>
+
+	  			<div class="concept">
+	  				<h3>Palindrome</h3>		
+	  					<div class="content">
+	  						<p>
+	  							A string that reads the same way forwards and backwards.<BR><br>
+								ex: level, any single letter, an empty string
+	  						</p>
+	  					</div>
+	  			</div>
+	  	</div>
+
+	  	<div class="lesson-title-box">
+  			<h2>Lesson 4: Solving Big Problems<a name="bigproblems"></a></h2>
+	  			<div class="concept">
+	  				<h3>Word Games:</h3>		
+	  					<div class="content">
+	  						<p>
+	  							When solving a problem with code it’s a good idea to break up every piece of the problem and decide what it’s going to take to solve each piece (function, string, dictionary, etc.).  It’s also important to break it up to pace yourself throughout solving the problem so that you can stay focused and have short term goals.<br><br>
+
+	  							Here's an example of breaking down the pieces needed to build a word game<br><br>
+
+	  							Concept Inventory:
+	  								<ul>
+	  									<li>Board - 2d array</li>
+	  									<li>Letters - string</li>
+	  									<li>Words - string</li>
+	  									<li>Hand - string</li>
+	  									<li>Legal Play - function(pos, dir, word)</li>
+	  									<li>Score - fucntion
+	  										<ul>
+	  											<li>Letters - dictionary</li>
+	  											<li>Play - function</li>
+	  											<li>Bonus - pos -> double word -> triple word</li>
+	  										</ul></li>
+	  									<li>Dictionary - set(words)</li>
+	  									<li>Blank Tile - string'</li>
+	  								</ul>
+	  						</p>
+	  					</div>
+	  			</div>
+
+
+</div>
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
