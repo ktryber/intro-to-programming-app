@@ -222,6 +222,19 @@ class RelationalDatabases(Handler):
 
 		self.render("relational.html", greetings=greetings, title=title, user=user, login=login, logout=logout)
 
+class ExtendedNotes(Handler):
+	def get(self):
+		title = "Kris Tryber Extended Notes"
+		user = users.get_current_user()
+		login = users.create_login_url(self.request.uri)
+		logout = users.create_logout_url(self.request.uri)
+
+		posts_to_fetch = 10
+		greetings_query = Greeting.query(ancestor=guestbook_key(DEFAULT_GUESTBOOK_NAME)).order(-Greeting.date)
+		greetings = greetings_query.fetch(posts_to_fetch)
+
+		self.render("extendednotes.html", greetings=greetings, title=title, user=user, login=login, logout=logout)
+
 app = webapp2.WSGIApplication([
 
 ('/', MainPage),
@@ -232,6 +245,7 @@ app = webapp2.WSGIApplication([
 ('/stage5javascript', Stage5javascript),
 ('/stage5api', Stage5api),
 ('/relationaldatabases', RelationalDatabases),
+('/extendednotes', ExtendedNotes),
 ('/sign', Guestbook),
 ], debug=True)
 

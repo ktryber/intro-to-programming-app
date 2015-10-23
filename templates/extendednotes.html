@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="stage">
+	<h1>Stage 5: Extended Notes</h1>
+		<div class="lesson-title-box">
+			<h2>Extended Learning Link 1</h2>
+				<div class="content">
+					<a href="http://www.blog.pythonlibrary.org/2012/07/18/python-a-simple-step-by-step-sqlite-tutorial/">SQlite Tutorial</a><br><br>
+
+					Within this tutorial I took notes on creating a database within python. Even though it was in the course I took within Udacity, I wanted to get some extra practice from a different source on how to initialize and add to a database. The most important parts that I wanted to drill on were creating the database, getting practice with the cursor by making it into a variable and then using that to create a database then add to it. 	
+
+					Also please see databaseexample.py within my app.
+				</div>
+		</div>		
+
+		<div class="lesson-title-box">
+			<h2>How to create a database in Python</h2>
+				<div class="content">
+					Using sqlite3 in Python
+					<ol>
+						<li>Import sqlite3 into your python file</li>
+						<li>Connect to a database<br><br>db = sqlite3.connect('data/mydb')</li>
+						<li>Next, create a variable for the cursor.<br><br> cursor = db.cursor()<br><br> The cursor allows you to interact with the database. Creating a table, adding/removing data from the table.</li>
+					</ol>
+
+					- sqlite only supports 5 data types that can be used to organize data within the database.
+					<ul>
+						<li>null</li>
+						<li>integer</li>
+						<li>real</li>
+						<li>text</li>
+						<li>blob</li>
+					</ul>
+				</div>
+		</div>
+
+		<div class="lesson-title-box">
+			<h2>How to insert data into the datbase</h2>
+				<div class="content">
+					<ol>
+						<li>Use your cursor to execute an insert SQL statement to create the table<br><br>cursor.execute('''CREATE TABLE albums
+                  (title text, artist text, release_date text, 
+                   publisher text, media_type text)''')</li>
+                   		<li>Then to insert some data<br><br> cursor.execute("INSERT INTO albums VALUES ('Glow', 'Andy Hunter', '7/24/2012', 'Xplore Records', 'MP3')")</li>
+                   		<li>Once the data is inserted make sure to commit the changes to the database.<br><br>conn.commit()</li>
+					</ol>
+				</div>
+		</div>
+
+		<div class="lesson-title-box">
+			<h2>Extended Learning Link 2</h2>
+				<div class="content">
+					<a href="http://www.bkent.net/Doc/simple5.htm">A Simple Guide to Five Normal Forms in Relational Database Theory</a>
+				</div>
+		</div>
+
+		<div class="lesson-title-box">
+			<h2>Introduction</h2>
+				<div class="content">
+					When designing a database the normal forms defined in relational database theory represent the guidelines for record design. These rules are designed to prevent update anomalies and data inconsistencies. 
+				</div>
+		</div>
+
+		<div class="lesson-title-box">
+			<h2>First Normal Form</h2>
+				<div class="content">
+					First normal form says that all occurrences of a record type must contain the same number of fields.
+				</div>
+		</div>
+
+		<div class="lesson-title-box">
+			<h2>Second Normal Form</h2>
+				<div class="content">
+					Within database tables you want all of the records to be facts about each record without having duplicate data within each row.<br><br>
+
+					Example: part : warehouse : quantity : warehouse-address<br><br>
+
+					This table would violate the second normal form because each part that is at the same warehouse would have the same warehouse address thus duplicating that address for every entry.  To bring this back to normal form we would need to create two separate tables.<br><br>
+
+					part : warehouse : quantity : warehouse-address        warehouse : warehouse-address<br><br>
+
+					The difference between these to examples is that the part : warehouse : quantity are all related facts to each specific part.  However the warehouse address is only a fact related to the warehouse thus we need to separate warehouse-address into a separate table eliminating duplicate data.
+
+				</div>
+		</div>
+
+		<div class="lesson-title-box">
+			<h2>Third Normal Form</h2>
+				<div class="content">
+					Third normal form is violated when a non-key field is a fact about another non-key field.  In that case the we would need to make separate tables. <br><br>
+
+					A record is normalized if every field is either part of a the key or provides a single valued fact about the key and nothing else.
+				</div>
+		</div>
+
+		<div class="lesson-title-box">
+			<h2>Fourth Normal Form</h2>
+				<div class="content">
+					A record type should not contain two or more independent mult-valued facts about one entity. It also must satisfy third normal form.
+				</div>
+		</div>
+
+		<div class="lesson-title-box">
+			<h2>Fifth Normal Form</h2>
+				<div class="content">
+					Fifth normal form deals with cases where information can be reconstructed from smaller pieces of information that can be maintained with less redundancy. Fifth normal form generalizes cases not covered by the others.<br><br>
+
+					example: <br>
+					agent : company : product<br> 
+					smith : ford    : car<br>
+					smith : ford    : truck<br>
+					smith : GM      : car<br>
+					smith : GM      : truck<br>
+					jones : ford    : car <br><br>
+
+					in this case we could generate this data with normalized form by splitting it up into 3 different tables<br><br>
+
+					agent : company<br>   
+					smith : ford<br>            
+					smith : GM<br>  
+					jones : ford <br><br>     
+
+					company : product<br>
+					ford    : car<br>
+					ford    : truck<br>
+					GM      : car<br>
+					GM      : truck<br><br>
+
+					agent : product<br>
+					smith : car<br>
+					smith : truck<br>
+					jones : car<br>
+					
+
+					
+
+				</div>
+		</div>				
+</div>
+
+{% endblock %}
